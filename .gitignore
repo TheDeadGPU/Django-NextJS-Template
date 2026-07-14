@@ -3,3 +3,5 @@
 /backend/__pycache__
 /frontend/.next
 /frontend/node_modules
+db.sqlite3
+.DS_Store

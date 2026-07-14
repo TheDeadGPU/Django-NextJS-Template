@@ -1,10 +1,7 @@
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from .models import Project
-from .serializers import ProjectSerializer
+from rest_framework.generics import ListAPIView
+from .models import BookReview
+from .serializers import BookReviewSerializer
 
-class ProjectListView(APIView):
-    def get(self, request):
-        projects = Project.objects.all()
-        serializer = ProjectSerializer(projects, many=True, context={'request': request})
-        return Response(serializer.data)
+class BookReviewListView(ListAPIView):
+    queryset = BookReview.objects.all()
+    serializer_class = BookReviewSerializer

@@ -1,41 +1,28 @@
-"use client"; // Add this line to treat this component as a client component
+'use client';
 
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-
-// Define interface for the API response
-interface Project {
-  id: number;
-  title: string;
-  description: string;
-  link: string;
-  image?: string;
-}
+import { useState, useEffect } from "react";
 
 export default function Home() {
-  const [projects, setProjects] = useState<Project[]>([]);
-
-  useEffect(() => {
-    axios.get<Project[]>('http://localhost:8000/projects/')
-      .then((response) => {
-        setProjects(response.data);
-      })
-      .catch((error) => console.error(error));
-  }, []);
-
-  return (
-    <div>
-      <h1>My Portfolio</h1>
-      <div>
-        {projects.map((project) => (
-          <div key={project.id}>
-            <h2>{project.title}</h2>
-            <p>{project.description}</p>
-            <a href={project.link}>View Project</a>
-            {project.image && <img src={project.image} alt={project.title} />}
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+    const [reviews, setReviews] = useState([]);
+    
+    useEffect(() => {
+        fetch("http://127.0.0.1:8000/api/reviews/")
+            .then(response => response.json())
+            .then(data => setReviews(data));
+    }, []);
+    
+    return (
+        <div>
+            <h1>Book Reviews</h1>
+            <ul>
+                {reviews.map(review => (
+                    <li key={review.id}>
+                        <h2>{review.title} by {review.author}</h2>
+                        <p>{review.review}</p>
+                        <strong>Rating: {review.rating}/5</strong>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
 }
