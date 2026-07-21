@@ -6,10 +6,16 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "schema:api": "cd .. && python manage.py spectacular --file frontend/app/types/schema.yaml",
+    "types:api": "openapi-typescript app/types/schema.yaml -o app/types/api.d.ts",
+    "types:api:remote": "openapi-typescript http://127.0.0.1:8000/api/schema/ -o app/types/api.d.ts",
+    "types:api:check": "openapi-typescript app/types/schema.yaml --check",
+    "types:compile": "npm run schema:api && npm run types:api"
   },
   "dependencies": {
     "next": "16.2.10",
+    "openapi-typescript": "^7.13.0",
     "react": "19.2.4",
     "react-dom": "19.2.4"
   },

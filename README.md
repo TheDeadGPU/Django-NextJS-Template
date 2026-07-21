@@ -23,8 +23,7 @@ venv\Scripts\activate     # Windows
 4. Install Python dependencies.
 ```
 # Install Django and DRF
-pip install django djangorestframework
-pip install django-cors-headers
+pip install django djangorestframework django-cors-headers drf-spectacular
 ```
 5. Run Django Migrations.
 ```
@@ -46,3 +45,11 @@ npm install
 npm run dev
 ```
 The server will be accessible by going to https://localhost/3000.
+
+## Compiling Dynamic Typescript Types from Django Models
+When developing Django models, it can be hard to keep your frontend types in sync with the shape of your Django DB model. This project includes an NPM Command that can sync your frontend types with your Django DB.
+
+To sync your frontend types with your Django DB Models, run the following command while inside the frontend folder.
+```
+npm run types:compile
+```
